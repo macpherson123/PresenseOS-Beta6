@@ -13,6 +13,10 @@ A distraction-free Android experience.
   <img src="assets/screenshots/about.png" width="180" alt="About"/>
 </p>
 
+## Best Results
+
+For the cleanest experience, use the [Debloater Magisk module](https://github.com/sunilpaulmathew/De-Bloater) to remove `SystemUI.apk` before or after installing PresenceOS.
+
 ## What Works
 
 - Wi-Fi
