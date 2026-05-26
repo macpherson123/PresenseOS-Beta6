@@ -2,6 +2,9 @@
 
 A distraction-free Android experience.
 
+NOTE: THIS IS BROKEN. I DO NOT OWN YOUR DEVICE.
+feedback apporediacted.lsfnewefn typo
+
 ## Screenshots
 
 <p align="center">
