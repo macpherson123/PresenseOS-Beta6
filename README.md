@@ -19,6 +19,7 @@ A distraction-free Android experience.
 - Hotspot
 - Bluetooth
 - 4G/5G Mobile Data
+- Cellular calls and SMS
 - PresenceChat voice and video calls (device-to-device, requires relay server online)
 
 ## Requirements
