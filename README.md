@@ -13,6 +13,14 @@ A distraction-free Android experience.
   <img src="assets/screenshots/about.png" width="180" alt="About"/>
 </p>
 
+## What Works
+
+- Wi-Fi
+- Hotspot
+- Bluetooth
+- 4G/5G Mobile Data
+- PresenceChat voice and video calls (device-to-device, requires relay server online)
+
 ## Requirements
 
 - Android device running a GSI or AOSP build targeting **SDK 36**
