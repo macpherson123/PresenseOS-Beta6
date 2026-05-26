@@ -5,6 +5,8 @@ A distraction-free Android experience.
 NOTE: THIS IS BROKEN. I DO NOT OWN YOUR DEVICE.
 feedback apporediacted.lsfnewefn typo
 
+But here is a snippet in time of the source code so we are all heeby geeby
+
 ## Screenshots
 
 <p align="center">
