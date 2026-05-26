@@ -1,6 +1,6 @@
 # PresenceOS Beta 6
 
-You can install this and pair with eachother via nfc or (dev mode rn ) qr code and video call eachother.
+You can install this and pair with eachother via nfc  (or QR but dev mode only) tap and video call eachother.
 
 A distraction-free Android experience.
 
