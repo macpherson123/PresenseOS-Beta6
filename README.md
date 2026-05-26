@@ -9,6 +9,8 @@ feedback apporediacted.lsfnewefn typo
 
 But here is a snippet in time of the source code so we are all heeby geeby
 
+i run the servers myself. calling via aws rn due to lack of external ip but webrtc relay is local. all through cloudlfared tunnels n whatnots
+
 ## Screenshots
 
 <p align="center">
