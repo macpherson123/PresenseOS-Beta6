@@ -2,6 +2,17 @@
 
 A distraction-free Android experience.
 
+## Screenshots
+
+<p align="center">
+  <img src="assets/screenshots/rotary.png" width="180" alt="Rotary Launcher"/>
+  <img src="assets/screenshots/chat.png" width="180" alt="PresenceChat"/>
+  <img src="assets/screenshots/themes.png" width="180" alt="Themes"/>
+  <img src="assets/screenshots/settings.png" width="180" alt="Settings"/>
+  <img src="assets/screenshots/relay-server.png" width="180" alt="Relay Server"/>
+  <img src="assets/screenshots/about.png" width="180" alt="About"/>
+</p>
+
 ## Requirements
 
 - Android device running a GSI or AOSP build targeting **SDK 36**
