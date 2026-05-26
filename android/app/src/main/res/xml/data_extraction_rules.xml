@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Refuse cloud + device-to-device backup of app data. PresenceOS holds the
+  user's PIN, contacts, message cache, and TURN credentials — none of it
+  should leave the device via Google Backup or Pixel-to-Pixel transfer.
+-->
+<data-extraction-rules>
+    <cloud-backup>
+        <exclude domain="root"            />
+        <exclude domain="file"            />
+        <exclude domain="database"        />
+        <exclude domain="sharedpref"      />
+        <exclude domain="external"        />
+    </cloud-backup>
+    <device-transfer>
+        <exclude domain="root"            />
+        <exclude domain="file"            />
+        <exclude domain="database"        />
+        <exclude domain="sharedpref"      />
+        <exclude domain="external"        />
+    </device-transfer>
+</data-extraction-rules>

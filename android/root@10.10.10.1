@@ -1,0 +1,184 @@
+═══════════════════════════════════════════════════════════════════════════════
+ PresenceOS coturn on AWS EC2 — step-by-step from CloudShell (ap-southeast-2)
+═══════════════════════════════════════════════════════════════════════════════
+
+CONTEXT
+  - Proxmox WAN-side subnet shifting does NOT affect this plan. Once TURN
+    lives on EC2 with an Elastic IP, the relay path is:
+        phone (4G) ↔ EC2 public IP ↔ phone (4G)
+    Neither phone touches the Proxmox network. 10.10.10.0/24 is internal only.
+  - You can decommission LXC 103 coturn after this lands.
+
+COST (ap-southeast-2)
+  - t4g.nano: free tier 12 months (750 hr/mo), then ~$3/mo
+  - Public IPv4: ~$3.65/mo regardless of free tier
+  - Egress: 100 GB/mo free, then $0.09/GB
+  Year 1: ~$4/mo. After: ~$7/mo.
+
+
+───────────────────────────────────────────────────────────────────────────────
+ STEP 1 — Region + Ubuntu 22.04 ARM AMI
+───────────────────────────────────────────────────────────────────────────────
+
+# Stop AWS CLI v2 from piping every JSON output through `less` (the
+# colon prompt + (END) marker is `less`, not an error).
+export AWS_PAGER=""
+export AWS_DEFAULT_REGION=ap-southeast-2
+
+AMI=$(aws ec2 describe-images --owners 099720109477 \
+  --filters "Name=name,Values=ubuntu/images/hvm-ssd/ubuntu-jammy-22.04-arm64-server-*" \
+            "Name=state,Values=available" \
+  --query 'reverse(sort_by(Images,&CreationDate))[:1].ImageId' \
+  --output text)
+echo "AMI: $AMI"
+
+
+───────────────────────────────────────────────────────────────────────────────
+ STEP 2 — SSH keypair (saved into CloudShell's persistent home)
+───────────────────────────────────────────────────────────────────────────────
+
+aws ec2 create-key-pair --key-name presence-turn \
+  --query 'KeyMaterial' --output text > ~/presence-turn.pem
+chmod 600 ~/presence-turn.pem
+
+# If "presence-turn" already exists, use "presence-turn-2" everywhere below.
+
+
+───────────────────────────────────────────────────────────────────────────────
+ STEP 3 — Security group (open coturn ports)
+───────────────────────────────────────────────────────────────────────────────
+
+SG=$(aws ec2 create-security-group \
+  --group-name presence-turn-sg \
+  --description "coturn for PresenceOS" \
+  --query 'GroupId' --output text)
+echo "SG: $SG"
+
+# SSH
+aws ec2 authorize-security-group-ingress --group-id $SG --protocol tcp --port 22         --cidr 0.0.0.0/0
+# STUN/TURN
+aws ec2 authorize-security-group-ingress --group-id $SG --protocol tcp --port 3478       --cidr 0.0.0.0/0
+aws ec2 authorize-security-group-ingress --group-id $SG --protocol udp --port 3478       --cidr 0.0.0.0/0
+# TLS variants (used once we add a cert later)
+aws ec2 authorize-security-group-ingress --group-id $SG --protocol tcp --port 5349       --cidr 0.0.0.0/0
+aws ec2 authorize-security-group-ingress --group-id $SG --protocol udp --port 5349       --cidr 0.0.0.0/0
+# Relay port range
+aws ec2 authorize-security-group-ingress --group-id $SG --protocol udp --port 49152-65535 --cidr 0.0.0.0/0
+
+
+───────────────────────────────────────────────────────────────────────────────
+ STEP 4 — Launch t4g.nano
+───────────────────────────────────────────────────────────────────────────────
+
+INSTANCE=$(aws ec2 run-instances \
+  --image-id $AMI \
+  --instance-type t4g.nano \
+  --key-name presence-turn \
+  --security-group-ids $SG \
+  --tag-specifications 'ResourceType=instance,Tags=[{Key=Name,Value=presence-turn}]' \
+  --query 'Instances[0].InstanceId' --output text)
+echo "Instance: $INSTANCE"
+
+aws ec2 wait instance-running --instance-ids $INSTANCE
+
+
+───────────────────────────────────────────────────────────────────────────────
+ STEP 5 — Elastic IP + capture private IP
+───────────────────────────────────────────────────────────────────────────────
+
+ALLOC=$(aws ec2 allocate-address --domain vpc --query 'AllocationId' --output text)
+EIP=$(aws ec2 describe-addresses --allocation-ids $ALLOC --query 'Addresses[0].PublicIp' --output text)
+aws ec2 associate-address --instance-id $INSTANCE --allocation-id $ALLOC
+echo "Public IP : $EIP"
+
+PRIV=$(aws ec2 describe-instances --instance-ids $INSTANCE \
+  --query 'Reservations[0].Instances[0].PrivateIpAddress' --output text)
+echo "Private IP: $PRIV"
+
+# !! WRITE BOTH OF THESE DOWN. You'll need them in Step 6 and Step 8. !!
+
+
+───────────────────────────────────────────────────────────────────────────────
+ STEP 6 — SSH in and install coturn
+───────────────────────────────────────────────────────────────────────────────
+
+ssh -o StrictHostKeyChecking=no -i ~/presence-turn.pem ubuntu@$EIP
+
+# ─── On the instance, run: ───────────────────────────────────────────────────
+
+sudo apt update
+sudo apt install -y coturn
+
+# Ubuntu ships coturn disabled by default — enable it
+sudo sed -i 's/^#TURNSERVER_ENABLED=1/TURNSERVER_ENABLED=1/' /etc/default/coturn
+
+# Detect IPs
+PRIV=$(ip -4 addr show ens5 2>/dev/null | awk '/inet /{print $2}' | cut -d/ -f1)
+EIP=$(curl -s http://169.254.169.254/latest/meta-data/public-ipv4)
+echo "PRIV=$PRIV  EIP=$EIP"
+
+# Write the config
+sudo tee /etc/turnserver.conf > /dev/null <<EOF
+listening-port=3478
+tls-listening-port=5349
+listening-ip=0.0.0.0
+relay-ip=$PRIV
+external-ip=$EIP/$PRIV
+min-port=49152
+max-port=65535
+lt-cred-mech
+user=presence:presenceos2026
+realm=presenceos.app
+fingerprint
+mobility
+no-tcp-relay
+no-multicast-peers
+cli=off
+no-tls
+no-dtls
+log-file=/var/log/turnserver.log
+simple-log
+EOF
+
+sudo systemctl enable --now coturn
+sudo systemctl status coturn --no-pager
+sudo ss -tunlp | grep -E '3478|turn'
+
+# Expect: udp/tcp 0.0.0.0:3478 LISTEN turnserver
+# Then exit back to CloudShell:
+exit
+
+
+───────────────────────────────────────────────────────────────────────────────
+ STEP 7 — Smoke test (from CloudShell or your laptop)
+───────────────────────────────────────────────────────────────────────────────
+
+sudo apt install -y coturn-utils 2>/dev/null   # if not already present
+turnutils_uclient -v -u presence -w presenceos2026 -y $EIP
+
+# Look for "success" allocations rather than timeouts.
+
+
+───────────────────────────────────────────────────────────────────────────────
+ STEP 8 — Update PresenceOS
+───────────────────────────────────────────────────────────────────────────────
+
+In contexts/SettingsContext.tsx (lines 81-83), replace the unreachable
+"118.149.72.252" with your new EIP:
+
+  turnUrl:      'turn:<EIP>:3478',
+  turnUsername: 'presence',
+  turnPassword: 'presenceos2026',
+
+
+───────────────────────────────────────────────────────────────────────────────
+ TEAR-DOWN (only if you ever decide to remove this)
+───────────────────────────────────────────────────────────────────────────────
+
+aws ec2 terminate-instances --instance-ids $INSTANCE
+aws ec2 wait instance-terminated --instance-ids $INSTANCE
+aws ec2 release-address --allocation-id $ALLOC
+aws ec2 delete-security-group --group-id $SG
+aws ec2 delete-key-pair --key-name presence-turn
+
+═══════════════════════════════════════════════════════════════════════════════

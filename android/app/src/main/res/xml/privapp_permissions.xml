@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Privileged app permissions whitelist for presenceOS.
+
+  On Android 12+ (and MTK Android 14) the platform enforces a whitelist for any
+  permission marked protectionLevel="privileged|signatureOrSystem".  Even if the
+  APK is installed in /system/priv-app/ the permission is silently denied unless
+  it appears here AND the XML is copied to:
+
+      /system/etc/permissions/privapp-permissions-com.presenceoslite.xml
+
+  HOW TO INSTALL (one-time, requires root or fastboot):
+    adb root
+    adb push privapp-permissions-com.presenceoslite.xml /system/etc/permissions/
+    adb reboot
+
+  Or via Magisk module (see setup_emulator.sh / module.prop approach):
+    Place the file inside a Magisk module overlay:
+    /data/adb/modules/<module>/system/etc/permissions/privapp-permissions-com.presenceoslite.xml
+-->
+<permissions>
+  <privapp-permissions package="com.presenceoslite">
+
+    <!-- Bluetooth silent enable/disable without user dialog -->
+    <permission name="android.permission.BLUETOOTH_PRIVILEGED"/>
+
+    <!-- Wi-Fi toggle (setWifiEnabled) on Android 10+ system apps -->
+    <permission name="android.permission.NETWORK_SETTINGS"/>
+    <permission name="android.permission.OVERRIDE_WIFI_CONFIG"/>
+    <permission name="android.permission.MANAGE_WIFI_INTERFACES"/>
+
+    <!-- Hotspot (SoftAP) start/stop via startSoftAp()/stopSoftAp() -->
+    <permission name="android.permission.TETHER_PRIVILEGED"/>
+
+    <!-- Mobile data toggle via TelephonyManager.setDataEnabled() -->
+    <permission name="android.permission.MODIFY_PHONE_STATE"/>
+    <permission name="android.permission.READ_PRIVILEGED_PHONE_STATE"/>
+
+    <!-- Write secure settings (location, NFC, BT fallback) -->
+    <permission name="android.permission.WRITE_SECURE_SETTINGS"/>
+    <permission name="android.permission.READ_DEVICE_CONFIG"/>
+    <permission name="android.permission.WRITE_DEVICE_CONFIG"/>
+
+    <!-- Screen lock / device admin -->
+    <permission name="android.permission.MANAGE_DEVICE_POLICY_DISPLAY"/>
+    <permission name="android.permission.MANAGE_DEVICE_POLICY_SCREEN_TIMEOUT"/>
+    <permission name="android.permission.MANAGE_DEVICE_POLICY_WIFI"/>
+    <permission name="android.permission.MANAGE_DEVICE_POLICY_BLUETOOTH"/>
+    <permission name="android.permission.MANAGE_DEVICE_POLICY_MOBILE_NETWORK"/>
+
+    <!-- Battery stats / power -->
+    <permission name="android.permission.BATTERY_STATS"/>
+    <permission name="android.permission.DEVICE_POWER"/>
+
+    <!-- Notifications -->
+    <permission name="android.permission.MANAGE_NOTIFICATIONS"/>
+
+    <!-- Status bar -->
+    <permission name="android.permission.STATUS_BAR"/>
+
+    <!-- Package usage stats -->
+    <permission name="android.permission.PACKAGE_USAGE_STATS"/>
+
+  </privapp-permissions>
+</permissions>

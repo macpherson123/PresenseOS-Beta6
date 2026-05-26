@@ -1,0 +1,34 @@
+--------- beginning of main
+05-14 11:10:07.970 10093 10117 I ReactNativeJS: rn-webrtc:pc:DEBUG 1 ctor +2m
+05-14 11:10:07.973 10093 10117 I ReactNativeJS: rn-webrtc:pc:DEBUG 1 createOffer +3ms
+05-14 11:10:07.985 10093 10117 I ReactNativeJS: rn-webrtc:pc:DEBUG 1 createOffer OK +13ms
+05-14 11:10:07.986 10093 10117 I ReactNativeJS: rn-webrtc:pc:DEBUG 1 setLocalDescription +1ms
+05-14 11:10:07.992 10093 10129 I org.webrtc.Logging: NetworkMonitor: Start monitoring with native observer -5476376616245350160 fieldTrialsString: 
+05-14 11:10:08.016 10093 10131 D com.oney.WebRTCModule.WebRTCModule: onIceGatheringChangeGATHERING
+05-14 11:10:08.021 10093 10185 I org.webrtc.Logging: NetworkMonitorAutoDetect: Network handle: 432902426637 becomes available: 100
+05-14 11:10:08.023 10093 10117 I ReactNativeJS: rn-webrtc:pc:DEBUG 1 setLocalDescription OK +37ms
+05-14 11:10:08.026 10093 10185 I org.webrtc.Logging: NetworkMonitorAutoDetect: handle: 432902426637 capabilities changed: [ Transports: CELLULAR Capabilities: SUPL&INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VPN&VALIDATED&NOT_ROAMING&FOREGROUND&NOT_CONGESTED&NOT_SUSPENDED&NOT_VCN_MANAGED LinkUpBandwidth>=7657Kbps LinkDnBandwidth>=7657Kbps Specifier: <TelephonyNetworkSpecifier [mSubId = 1]> UnderlyingNetworks: Null]
+05-14 11:10:08.030 10093 10185 I org.webrtc.Logging: NetworkMonitorAutoDetect: handle: 432902426637 link properties changed
+05-14 11:10:08.034 10093 10185 I org.webrtc.Logging: NetworkMonitorAutoDetect: Network handle: 450082295821 becomes available: 104
+05-14 11:10:08.038 10093 10185 I org.webrtc.Logging: NetworkMonitorAutoDetect: handle: 450082295821 capabilities changed: [ Transports: WIFI Capabilities: NOT_METERED&INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VPN&VALIDATED&NOT_ROAMING&FOREGROUND&NOT_CONGESTED&NOT_SUSPENDED&NOT_VCN_MANAGED LinkUpBandwidth>=12000Kbps LinkDnBandwidth>=60000Kbps TransportInfo: <SSID: <unknown ssid>, BSSID: 02:00:00:00:00:00, MAC: 02:00:00:00:00:00, IP: /10.0.0.88, Security type: 2, Supplicant state: COMPLETED, Wi-Fi standard: 11ac, RSSI: -28, Link speed: 390Mbps, Tx Link speed: 390Mbps, Max Supported Tx Link speed: 433Mbps, Rx Link speed: 433Mbps, Max Supported Rx Link speed: 433Mbps, Frequency: 5785MHz, Net ID: -1, Metered hint: false, score: 60, isUsable: true, CarrierMerged: false, SubscriptionId: -1, IsPrimary: -1, Trusted: true, Restricted: false, Ephemeral: false, OEM paid: false, OEM private: false, OSU AP: false, FQDN: <none>, Provider friendly name: <none>, Requesting package name: <none><none>MLO Information: , Is TID-To-Link negotiation supported by the AP: false, AP MLD Address: <none>, AP MLO Link Id: <none>, AP MLO Affiliated links: <none>, Vendor Data: <none>> SignalStrength: -28 UnderlyingNetworks: Null]
+05-14 11:10:08.044 10093 10185 I org.webrtc.Logging: NetworkMonitorAutoDetect: handle: 450082295821 link properties changed
+05-14 11:10:08.076 10093 10131 D com.oney.WebRTCModule.WebRTCModule: onIceCandidate
+05-14 11:10:08.080 10093 10131 D com.oney.WebRTCModule.WebRTCModule: onIceCandidate
+05-14 11:10:08.177 10093 10131 D com.oney.WebRTCModule.WebRTCModule: onIceCandidate
+05-14 11:10:08.177 10093 10131 D com.oney.WebRTCModule.WebRTCModule: onIceCandidate
+05-14 11:10:08.179 10093 10131 D com.oney.WebRTCModule.WebRTCModule: onIceCandidate
+05-14 11:10:08.182 10093 10131 D com.oney.WebRTCModule.WebRTCModule: onIceCandidate
+05-14 11:10:08.183 10093 10131 D com.oney.WebRTCModule.WebRTCModule: onIceCandidate
+05-14 11:10:08.184 10093 10131 D com.oney.WebRTCModule.WebRTCModule: onIceCandidate
+05-14 11:10:16.100 10093 10117 I ReactNativeJS: rn-webrtc:pc:DEBUG 1 close +8s
+05-14 11:10:16.102 10093 10183 D com.oney.WebRTCModule.WebRTCModule: PeerConnection.close() for 1
+05-14 11:10:16.103 10093 10093 W WindowOnBackDispatcher: OnBackInvokedCallback is not enabled for the application.
+05-14 11:10:16.103 10093 10093 W WindowOnBackDispatcher: Set 'android:enableOnBackInvokedCallback="true"' in the application manifest.
+05-14 11:10:16.112 10093 10129 I org.webrtc.Logging: NetworkMonitor: Stop monitoring with native observer -5476376616245350160
+05-14 11:10:16.113 10093 10129 I org.webrtc.Logging: NetworkMonitorAutoDetect: Unregister network callback
+05-14 11:10:16.115 10093 10129 I org.webrtc.Logging: NetworkMonitorAutoDetect: Unregister network callback
+05-14 11:10:16.124 10093 10183 D com.oney.WebRTCModule.WebRTCModule: PeerConnection.dispose() for 1
+05-14 11:10:18.235 10093 10093 W WindowOnBackDispatcher: sendCancelIfRunning: isInProgress=falsecallback=android.view.ViewRootImpl$$ExternalSyntheticLambda11@716656b
+05-14 11:10:18.241 10093 10111 D HWUI    : endAllActiveAnimators on 0xb400007bac9518f0 (RippleDrawable) with handle 0xb400007b7c772f20
+05-14 11:10:18.251 10093 10093 W WindowOnBackDispatcher: OnBackInvokedCallback is not enabled for the application.
+05-14 11:10:18.251 10093 10093 W WindowOnBackDispatcher: Set 'android:enableOnBackInvokedCallback="true"' in the application manifest.

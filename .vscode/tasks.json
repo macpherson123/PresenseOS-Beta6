@@ -1,0 +1,20 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "eas build android apk",
+			"type": "shell",
+			"command": "eas",
+			"args": [
+				"build",
+				"-p",
+				"android",
+				"--profile",
+				"development"
+			],
+			"isBackground": false,
+			"problemMatcher": [],
+			"group": "build"
+		}
+	]
+}

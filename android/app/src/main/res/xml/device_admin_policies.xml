@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Device admin policy declarations for presenceOS.
+
+  We request only the minimum needed policy: force-lock (to allow
+  DevicePolicyManager.lockNow() to turn the screen off when the user taps
+  the Lock quick-toggle).
+
+  This file is referenced from AndroidManifest.xml via:
+    <receiver android:name=".PresenceAdminReceiver">
+      <meta-data android:name="android.app.device_admin"
+                 android:resource="@xml/device_admin_policies"/>
+    </receiver>
+
+  Goes in: android/app/src/main/res/xml/device_admin_policies.xml
+-->
+<device-admin xmlns:android="http://schemas.android.com/apk/res/android">
+    <uses-policies>
+        <force-lock />
+    </uses-policies>
+</device-admin>

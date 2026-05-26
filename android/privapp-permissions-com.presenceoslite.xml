@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Privileged-app permissions whitelist for PresenceOS.
+
+  This file must be pushed to /system/etc/permissions/ (or /product/etc/permissions/)
+  on the device. Without it Android 8+ denies every signature|privileged permission
+  at runtime even when the app lives in /system/priv-app/.
+
+  Push commands (run from PC with USB debugging enabled, device rooted):
+    adb root
+    adb remount
+    adb push privapp-permissions-com.presenceoslite.xml /system/etc/permissions/privapp-permissions-com.presenceoslite.xml
+    adb shell chmod 644 /system/etc/permissions/privapp-permissions-com.presenceoslite.xml
+    adb shell chown root:root /system/etc/permissions/privapp-permissions-com.presenceoslite.xml
+
+  Then move the APK (see below).
+-->
+<permissions>
+    <privapp-permissions package="com.presenceoslite">
+  <!-- ── Download Manager / File Access ─────────────────────────────── -->
+  <permission name="android.permission.DOWNLOAD_WITHOUT_NOTIFICATION"/>
+  <permission name="android.permission.MANAGE_DOCUMENTS"/>
+  <permission name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS"/>
+  <permission name="android.permission.FOREGROUND_SERVICE_DATA_SYNC"/>
+  <permission name="android.permission.FOREGROUND_SERVICE_EXTERNAL_STORAGE"/>
+
+        <!-- ── System settings ──────────────────────────────────────── -->
+        <permission name="android.permission.WRITE_SECURE_SETTINGS"/>
+        <permission name="android.permission.WRITE_SETTINGS"/>
+        <permission name="android.permission.READ_DEVICE_CONFIG"/>
+        <permission name="android.permission.WRITE_DEVICE_CONFIG"/>
+        <permission name="android.permission.CHANGE_CONFIGURATION"/>
+
+        <!-- ── Telephony / mobile data ──────────────────────────────── -->
+        <permission name="android.permission.MODIFY_PHONE_STATE"/>
+        <permission name="android.permission.READ_PRIVILEGED_PHONE_STATE"/>
+        <permission name="android.permission.READ_PHONE_STATE"/>
+        <permission name="android.permission.READ_PHONE_NUMBERS"/>
+        <permission name="android.permission.CALL_PHONE"/>
+        <permission name="android.permission.ANSWER_PHONE_CALLS"/>
+        <permission name="android.permission.PROCESS_OUTGOING_CALLS"/>
+        <permission name="android.permission.READ_CALL_LOG"/>
+        <permission name="android.permission.WRITE_CALL_LOG"/>
+        <permission name="android.permission.MANAGE_OWN_CALLS"/>
+
+        <!-- ── SMS ──────────────────────────────────────────────────── -->
+        <permission name="android.permission.SEND_SMS"/>
+        <permission name="android.permission.RECEIVE_SMS"/>
+        <permission name="android.permission.READ_SMS"/>
+        <permission name="android.permission.RECEIVE_MMS"/>
+
+        <!-- ── WiFi / Network ───────────────────────────────────────── -->
+        <permission name="android.permission.OVERRIDE_WIFI_CONFIG"/>
+        <permission name="android.permission.MANAGE_WIFI_INTERFACES"/>
+        <permission name="android.permission.NETWORK_SETTINGS"/>
+        <permission name="android.permission.TETHER_PRIVILEGED"/>
+        <permission name="android.permission.CHANGE_NETWORK_STATE"/>
+
+        <!-- ── Bluetooth ────────────────────────────────────────────── -->
+        <permission name="android.permission.BLUETOOTH_PRIVILEGED"/>
+
+        <!-- ── Notifications / DND ──────────────────────────────────── -->
+        <permission name="android.permission.ACCESS_NOTIFICATION_POLICY"/>
+        <permission name="android.permission.MANAGE_NOTIFICATIONS"/>
+        <permission name="android.permission.POST_NOTIFICATIONS"/>
+
+        <!-- ── Status bar / UI ──────────────────────────────────────── -->
+        <permission name="android.permission.STATUS_BAR"/>
+        <permission name="android.permission.EXPAND_STATUS_BAR"/>
+        <permission name="android.permission.SYSTEM_ALERT_WINDOW"/>
+
+        <!-- ── Battery / Power ──────────────────────────────────────── -->
+        <permission name="android.permission.BATTERY_STATS"/>
+        <permission name="android.permission.DEVICE_POWER"/>
+        <permission name="android.permission.REBOOT"/>
+        <permission name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS"/>
+
+        <!-- ── Package / App management ─────────────────────────────── -->
+        <permission name="android.permission.PACKAGE_USAGE_STATS"/>
+        <permission name="android.permission.QUERY_ALL_PACKAGES"/>
+        <permission name="android.permission.KILL_BACKGROUND_PROCESSES"/>
+        <permission name="android.permission.GET_PACKAGE_SIZE"/>
+        <permission name="android.permission.CLEAR_APP_CACHE"/>
+        <permission name="android.permission.REQUEST_INSTALL_PACKAGES"/>
+        <permission name="android.permission.REQUEST_DELETE_PACKAGES"/>
+        <permission name="android.permission.GET_TASKS"/>
+        <permission name="android.permission.REORDER_TASKS"/>
+
+        <!-- ── Storage ──────────────────────────────────────────────── -->
+        <permission name="android.permission.MANAGE_EXTERNAL_STORAGE"/>
+        <permission name="android.permission.MANAGE_MEDIA"/>
+
+        <!-- ── Device policy (Android 14+) ─────────────────────────── -->
+        <permission name="android.permission.MANAGE_DEVICE_POLICY_BLUETOOTH"/>
+        <permission name="android.permission.MANAGE_DEVICE_POLICY_DISPLAY"/>
+        <permission name="android.permission.MANAGE_DEVICE_POLICY_MOBILE_NETWORK"/>
+        <permission name="android.permission.MANAGE_DEVICE_POLICY_SCREEN_TIMEOUT"/>
+        <permission name="android.permission.MANAGE_DEVICE_POLICY_WIFI"/>
+
+    </privapp-permissions>
+</permissions>

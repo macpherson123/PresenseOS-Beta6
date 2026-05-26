@@ -1,0 +1,38 @@
+<svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <title>PresenceOS</title>
+
+  <!-- Background -->
+  <rect width="512" height="512" rx="100" fill="#0c0f14"/>
+
+  <!-- Three concentric presence arcs — 270° each, gap at lower-right (4:30) -->
+  <!-- All rotate 90° so drawing starts at 6 o'clock going clockwise; gap falls between 3 and 6 o'clock -->
+
+  <!-- Inner arc  r=96  stroke=10  circ=603  arc=452  gap=151 -->
+  <circle cx="256" cy="256" r="96"
+    fill="none" stroke="#7fb3fa" stroke-width="10" stroke-linecap="round"
+    stroke-dasharray="452 151"
+    transform="rotate(90,256,256)"/>
+
+  <!-- Mid arc  r=136  stroke=16  circ=855  arc=641  gap=214 -->
+  <circle cx="256" cy="256" r="136"
+    fill="none" stroke="#4f8ef7" stroke-width="16" stroke-linecap="round"
+    stroke-dasharray="641 214"
+    transform="rotate(90,256,256)"/>
+
+  <!-- Outer arc  r=176  stroke=46  circ=1106  arc=830  gap=276 -->
+  <circle cx="256" cy="256" r="176"
+    fill="none" stroke="#ffffff" stroke-width="46" stroke-linecap="round"
+    stroke-dasharray="830 276"
+    transform="rotate(90,256,256)"/>
+
+  <!-- Centre presence dot -->
+  <circle cx="256" cy="256" r="20" fill="#ffffff"/>
+
+  <!-- Connector line from centre toward gap (lower-right) — suggests outward signal -->
+  <line x1="256" y1="256" x2="330" y2="330"
+    stroke="#4f8ef7" stroke-width="8" stroke-linecap="round" opacity="0.6"/>
+
+  <!-- Terminal dot at gap midpoint on inner arc -->
+  <circle cx="323" cy="323" r="10" fill="#4f8ef7" opacity="0.85"/>
+
+</svg>

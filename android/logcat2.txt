@@ -1,0 +1,31 @@
+--------- beginning of main
+05-14 11:12:50.619  5049  5073 I ReactNativeJS: rn-webrtc:pc:DEBUG 9 ctor +4m
+05-14 11:12:50.622  5049  5073 I ReactNativeJS: rn-webrtc:pc:DEBUG 9 createOffer +3ms
+05-14 11:12:50.636  5049  5073 I ReactNativeJS: rn-webrtc:pc:DEBUG 9 createOffer OK +14ms
+05-14 11:12:50.637  5049  5073 I ReactNativeJS: rn-webrtc:pc:DEBUG 9 setLocalDescription +1ms
+05-14 11:12:50.644  5049  5086 I org.webrtc.Logging: NetworkMonitor: Start monitoring with native observer -5476376650572898128 fieldTrialsString: 
+05-14 11:12:50.655  5049  5149 I org.webrtc.Logging: NetworkMonitorAutoDetect: Network handle: 1090032422925 becomes available: 253
+05-14 11:12:50.659  5049  5088 D com.oney.WebRTCModule.WebRTCModule: onIceGatheringChangeGATHERING
+05-14 11:12:50.663  5049  5149 I org.webrtc.Logging: NetworkMonitorAutoDetect: handle: 1090032422925 capabilities changed: [ Transports: WIFI Capabilities: NOT_METERED&INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VPN&VALIDATED&NOT_ROAMING&FOREGROUND&NOT_CONGESTED&NOT_SUSPENDED&NOT_VCN_MANAGED LinkUpBandwidth>=12000Kbps LinkDnBandwidth>=60000Kbps TransportInfo: <SSID: <unknown ssid>, BSSID: 02:00:00:00:00:00, MAC: 02:00:00:00:00:00, IP: /10.0.0.123, Security type: 2, Supplicant state: COMPLETED, Wi-Fi standard: 11ac, RSSI: -37, Link speed: 390Mbps, Tx Link speed: 390Mbps, Max Supported Tx Link speed: 433Mbps, Rx Link speed: 433Mbps, Max Supported Rx Link speed: 433Mbps, Frequency: 5785MHz, Net ID: -1, Metered hint: false, score: 60, isUsable: true, CarrierMerged: false, SubscriptionId: -1, IsPrimary: -1, Trusted: true, Restricted: false, Ephemeral: false, OEM paid: false, OEM private: false, OSU AP: false, FQDN: <none>, Provider friendly name: <none>, Requesting package name: <none><none>MLO Information: , Is TID-To-Link negotiation supported by the AP: false, AP MLD Address: <none>, AP MLO Link Id: <none>, AP MLO Affiliated links: <none>, Vendor Data: <none>> SignalStrength: -37 UnderlyingNetworks: Null]
+05-14 11:12:50.669  5049  5149 I org.webrtc.Logging: NetworkMonitorAutoDetect: handle: 1090032422925 link properties changed
+05-14 11:12:50.670  5049  5073 I ReactNativeJS: rn-webrtc:pc:DEBUG 9 setLocalDescription OK +33ms
+05-14 11:12:50.688  5049  5088 D com.oney.WebRTCModule.WebRTCModule: onIceCandidate
+05-14 11:12:50.688  5049  5088 D com.oney.WebRTCModule.WebRTCModule: onIceCandidate
+05-14 11:12:50.689  5049  5088 D com.oney.WebRTCModule.WebRTCModule: onIceCandidate
+05-14 11:12:50.689  5049  5088 D com.oney.WebRTCModule.WebRTCModule: onIceCandidate
+05-14 11:12:50.750  5049  5088 D com.oney.WebRTCModule.WebRTCModule: onIceCandidate
+05-14 11:12:50.750  5049  5088 D com.oney.WebRTCModule.WebRTCModule: onIceCandidate
+05-14 11:12:50.799  5049  5088 D com.oney.WebRTCModule.WebRTCModule: onIceCandidate
+05-14 11:12:50.806  5049  5088 D com.oney.WebRTCModule.WebRTCModule: onIceCandidate
+05-14 11:12:50.878  5049  5073 I ReactNativeJS: rn-webrtc:pc:DEBUG 9 close +208ms
+05-14 11:12:50.879  5049  5153 D com.oney.WebRTCModule.WebRTCModule: PeerConnection.close() for 9
+05-14 11:12:50.882  5049  5049 W WindowOnBackDispatcher: OnBackInvokedCallback is not enabled for the application.
+05-14 11:12:50.882  5049  5049 W WindowOnBackDispatcher: Set 'android:enableOnBackInvokedCallback="true"' in the application manifest.
+05-14 11:12:50.886  5049  5086 I org.webrtc.Logging: NetworkMonitor: Stop monitoring with native observer -5476376650572898128
+05-14 11:12:50.887  5049  5086 I org.webrtc.Logging: NetworkMonitorAutoDetect: Unregister network callback
+05-14 11:12:50.888  5049  5086 I org.webrtc.Logging: NetworkMonitorAutoDetect: Unregister network callback
+05-14 11:12:50.899  5049  5153 D com.oney.WebRTCModule.WebRTCModule: PeerConnection.dispose() for 9
+05-14 11:12:52.508  5049  5049 W WindowOnBackDispatcher: sendCancelIfRunning: isInProgress=falsecallback=android.view.ViewRootImpl$$ExternalSyntheticLambda11@3ec075c
+05-14 11:12:52.525  5049  5067 D HWUI    : endAllActiveAnimators on 0xb40000721e7f8530 (RippleDrawable) with handle 0xb4000072ce5c1e10
+05-14 11:12:52.539  5049  5049 W WindowOnBackDispatcher: OnBackInvokedCallback is not enabled for the application.
+05-14 11:12:52.539  5049  5049 W WindowOnBackDispatcher: Set 'android:enableOnBackInvokedCallback="true"' in the application manifest.

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  PresenceOS network policy.
+
+  - cleartextTrafficPermitted="false" everywhere: every HTTP call must be HTTPS.
+    The TURN server uses turns:// (TLS) and Socket.IO uses wss://, so this
+    breaks nothing in normal operation but blocks any future accidental http://.
+  - The user's WebView still loads http:// pages because it has its own
+    mixedContentMode; the network security config only governs the app's
+    own networking stack (OkHttp / HttpURLConnection).
+
+  When you're ready to certificate-pin the signalling endpoint, add a
+  <pin-set> block under a <domain-config> targeting presenceos.app (and
+  32.236.89.130 if you pin by IP). Don't pin until you have a backup pin
+  for the next cert rotation — a stale pin bricks the app.
+-->
+<network-security-config>
+    <base-config cleartextTrafficPermitted="false">
+        <trust-anchors>
+            <certificates src="system" />
+        </trust-anchors>
+    </base-config>
+</network-security-config>
