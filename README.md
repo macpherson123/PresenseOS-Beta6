@@ -1,5 +1,7 @@
 # PresenceOS Beta 6
 
+> **This is a very tentative first public release, shared to gather early feedback. Expect rough edges — bug reports and suggestions are welcome.**
+
 A distraction-free Android experience.
 
 ## Screenshots
