@@ -1323,7 +1323,7 @@ class PresenceDeviceControlModule(
           Telephony.Sms.DATE, Telephony.Sms.TYPE, Telephony.Sms.READ),
         "${Telephony.Sms.THREAD_ID} = ?",
         arrayOf(threadId),
-        "${Telephony.Sms.DATE} ASC"
+        "${Telephony.Sms.DATE} DESC LIMIT 200"
       )
 
       val arr = Arguments.createArray()

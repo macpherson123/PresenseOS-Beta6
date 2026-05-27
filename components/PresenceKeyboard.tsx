@@ -186,6 +186,7 @@ function PresenceKeyboardImpl({
           placeholder="Write a message…"
           placeholderTextColor={t.textMuted}
           multiline
+          autoFocus
           blurOnSubmit={false}
         />
         {onSend && (

@@ -161,7 +161,7 @@ export default function SmsScreen() {
     setLoadingMessages(true);
     try {
       const msgs: SmsMessage[] = await PresenceDeviceControl.getSmsMessages(thread.threadId);
-      msgs.sort((a, b) => a.date - b.date);
+      msgs.sort((a, b) => a.date - b.date); // native returns DESC LIMIT 200; re-sort ASC for display
       setMessages(msgs);
       setTimeout(() => scrollRef.current?.scrollToEnd({ animated: false }), 100);
     } catch {}
