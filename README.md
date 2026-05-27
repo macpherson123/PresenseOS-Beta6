@@ -2,7 +2,11 @@
 
 > **This is a very tentative first public release, shared to gather early feedback. Expect rough edges — bug reports and suggestions are welcome.**
 
-A distraction-free Android experience.
+A distraction-free Android experience. Install it, pair with someone via NFC (or QR code in dev mode), and video call each other.
+
+I run the servers myself — calling via AWS due to lack of external IP, WebRTC relay is local, all through Cloudflare tunnels.
+
+[Sign up / feedback survey](https://signup.presenceos.qzz.io/)
 
 ## Screenshots
 
