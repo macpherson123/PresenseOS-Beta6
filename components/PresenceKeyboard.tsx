@@ -12,7 +12,7 @@
 import React, { useState, useCallback, useMemo, useEffect, useRef } from 'react';
 import {
   View, Text, StyleSheet, Pressable, ScrollView,
-  Animated, Platform,
+  Animated, Platform, TextInput,
 } from 'react-native';
 import * as Haptics from 'expo-haptics';
 import { Delete } from 'lucide-react-native';
@@ -173,10 +173,33 @@ function PresenceKeyboardImpl({
     textScrollRef.current?.scrollToEnd({ animated: false });
   }, [value]);
 
-  // Render nothing when the user has chosen the system keyboard. Placed AFTER
-  // all hooks so toggling presenceKeyboardEnabled never violates the Rules of
-  // Hooks (which was the source of the on/off crashes).
-  if (kbDisabled) return null;
+  // Fallback compose bar when the user has chosen the system keyboard. Placed
+  // AFTER all hooks so toggling presenceKeyboardEnabled never violates the
+  // Rules of Hooks (which was the source of the on/off crashes).
+  if (kbDisabled) {
+    return (
+      <View style={[fallback.row, { backgroundColor: t.bg, borderTopColor: t.border }]}>
+        <TextInput
+          style={[fallback.input, { color: t.text, backgroundColor: t.surface, borderColor: t.border }]}
+          value={value}
+          onChangeText={onChange}
+          placeholder="Write a message…"
+          placeholderTextColor={t.textMuted}
+          multiline
+          blurOnSubmit={false}
+        />
+        {onSend && (
+          <Pressable
+            style={[fallback.sendBtn, { backgroundColor: value.trim() ? t.accent : t.surface, borderColor: t.border }]}
+            onPress={() => { if (value.trim()) onSend(); }}
+            disabled={!value.trim()}
+          >
+            <Text style={[fallback.sendText, { color: value.trim() ? t.bg : t.textMuted }]}>Send</Text>
+          </Pressable>
+        )}
+      </View>
+    );
+  }
 
   return (
     <Animated.View
@@ -525,6 +548,37 @@ const styles = StyleSheet.create({
     fontSize: 17,
     fontWeight: '400' as const,
     includeFontPadding: false,
+  },
+});
+
+const fallback = StyleSheet.create({
+  row: {
+    flexDirection: 'row',
+    alignItems: 'flex-end',
+    padding: 8,
+    gap: 8,
+    borderTopWidth: StyleSheet.hairlineWidth,
+  },
+  input: {
+    flex: 1,
+    borderRadius: 20,
+    borderWidth: 1,
+    paddingHorizontal: 14,
+    paddingVertical: 10,
+    fontSize: 16,
+    maxHeight: 120,
+  },
+  sendBtn: {
+    borderRadius: 20,
+    borderWidth: 1,
+    paddingHorizontal: 18,
+    paddingVertical: 10,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  sendText: {
+    fontSize: 15,
+    fontWeight: '700' as const,
   },
 });
 
