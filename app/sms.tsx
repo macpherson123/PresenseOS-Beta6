@@ -130,19 +130,22 @@ export default function SmsScreen() {
     setLoadingThreads(true);
     try {
       const raw: any[] = await PresenceDeviceControl.getSmsConversations();
-      const resolved = await Promise.all(
-        raw.filter((th: any) => th?.address).map(async (th: any) => {
-          let contactName = th.address;
-          try {
-            const n = await PresenceDeviceControl.getContactForNumber(th.address);
-            if (n) contactName = n;
-          } catch {}
-          return { ...th, contactName } as SmsThread;
-        })
-      );
-      // Always show newest conversation first
-      resolved.sort((a, b) => (b.date ?? 0) - (a.date ?? 0));
-      setThreads(resolved);
+      const filtered = raw.filter((th: any) => th?.address);
+      // Show threads immediately with phone numbers, then resolve contact names in background
+      const initial = filtered.map((th: any) => ({ ...th, contactName: th.address } as SmsThread));
+      initial.sort((a, b) => (b.date ?? 0) - (a.date ?? 0));
+      setThreads(initial);
+      setLoadingThreads(false);
+
+      // Resolve contact names one-at-a-time in background without blocking the bridge
+      for (const th of filtered) {
+        try {
+          const n = await PresenceDeviceControl.getContactForNumber(th.address);
+          if (n) {
+            setThreads(prev => prev.map(t => t.address === th.address ? { ...t, contactName: n } : t));
+          }
+        } catch {}
+      }
     } catch (e: any) {
       if (e?.message?.includes('READ_SMS')) {
         Alert.alert(
@@ -150,7 +153,6 @@ export default function SmsScreen() {
           'presenceOS needs READ_SMS permission to show messages. Grant it in Settings > Apps > presenceOS > Permissions.',
         );
       }
-    } finally {
       setLoadingThreads(false);
     }
   }, []);

@@ -77,7 +77,7 @@ const defaultSettings: DeviceSettings = {
   defaultCallingCode:     '+64',
   dismissedTips:          [],
   browserSocialBlock:     true,
-  presenceKeyboardEnabled: true,
+  presenceKeyboardEnabled: false,
   // Self-hosted coturn on AWS EC2 (ap-southeast-2, t3.micro + Elastic IP).
   // Realm presenceos.app, long-term credential. Verified reachable from 4G:
   // STUN reflexive + TURN allocation both succeeded against UDP 3478.
